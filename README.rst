@@ -1,6 +1,8 @@
 Groundwater Age Tools
 #######################################
 
+a small repo to hold groundwater age tools developed by Komanawa Solutions Ltd.
+
 Dependencies
 ==================
 
