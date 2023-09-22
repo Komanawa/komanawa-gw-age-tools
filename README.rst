@@ -25,7 +25,7 @@ Install from Github
 
 .. code-block:: bash
 
-    conda create -c conda-forge --name gw_detect  python=3.11 pandas=2.0.3 numpy=1.25.2 matplotlib=3.7.2 scipy=1.11.2 pytables=3.8.0 psutil=5.9.5
+    conda create -c conda-forge --name gw_detect  python=3.11 pandas=2.0.3 numpy=1.25.2 scipy=1.11.2 pytables=3.8.0
     conda activate gw_detect
     pip install git+https://github.com/Komanawa-Solutions-Ltd/gw_age_tools
 
