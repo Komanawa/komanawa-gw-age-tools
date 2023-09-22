@@ -72,8 +72,20 @@ def test_get_source_initial_conc_bepm(plot=False):
     if plot:
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
-        ax.plot(source_conc.index, source_conc.values)
-        ax.axvline(0, color='k', linestyle='--')
+        temp = pd.Series(index=source_conc.index)
+        temp[:] = init_conc + (prev_slope * source_conc.index[:])
+        temp[temp<min_conc] = np.nan
+
+        ax.plot(temp.index, temp.values, label='receptor concentration (input)', color='orange')
+        ax.plot(source_conc.index, source_conc.values, label='source concentration (predicted)', color='b')
+        ax.axvline(0, color='k', linestyle='--', label='initial time')
+        ax.set_xlabel('time (years)')
+        ax.set_xlim(-100,10)
+        ax.set_ylabel('concentration')
+        ax.set_title('predict_historical_source_conc')
+        ax.legend()
+        fig.tight_layout()
+        fig.savefig(Path(__file__).parents[1].joinpath('figures', 'predict_historical_source_conc.png'))
         plt.show()
 
 
@@ -116,8 +128,11 @@ def test_predict_source_future_past_conc_bepm(plot=False):
         ax.axvline(0, color='k', ls='--', label='initial time')
         ax.set_xlabel('time (years)')
         ax.set_ylabel('concentration')
+        ax.set_title('predict_source_future_past_conc_bepm')
         ax.set_xlim(age_range)
         ax.legend()
+        fig.tight_layout()
+        fig.savefig(Path(__file__).parents[1].joinpath('figures', 'predict_source_future_past_conc_bepm.png'))
         plt.show()
 
 
@@ -149,9 +164,13 @@ def test_predict_future_conc_bepm(plot=False):
     if plot:
         import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
-        ax.plot(input_series.index, input_series.values, label='input')
-        ax.plot(data.index, data.values, label='output')
+        ax.plot(input_series.index, input_series.values, label='Source Concentration (input)')
+        ax.plot(data.index, data.values, label='Receptor Concentration')
+        ax.set_xlabel('time (years)')
+        ax.set_ylabel('concentration')
+        ax.set_title('predict_future_conc_bepm')
         ax.legend()
+        fig.savefig(Path(__file__).parents[1].joinpath('figures', 'predict_future_conc_bepm.png'))
         plt.show()
 
     # test with missing source concentration
@@ -169,7 +188,7 @@ def test_predict_future_conc_bepm(plot=False):
 
 
 if __name__ == '__main__':
-    plot_tests = False
+    plot_tests = True
     test_predict_future_conc_bepm(plot_tests)
     test_get_source_initial_conc_bepm(plot_tests)
     test_predict_source_future_past_conc_bepm(plot_tests)
