@@ -84,16 +84,27 @@ def check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2):
     :param f_p2: fraction of the second piston flow component that is in the fast flow component
     :return:
     """
-    assert mrt_p1 is not None
-    if mrt is None and mrt_p2 is None:
-        raise ValueError('one of mrt or mrt_p2 must be passed')
-    elif mrt is not None and mrt_p2 is None:
-        mrt_p2 = (mrt - (mrt_p1 * frac_p1)) / (1 - frac_p1)
-    elif mrt is None and mrt_p2 is not None:
-        mrt = (mrt_p1 * frac_p1) + (mrt_p2 * (1 - frac_p1))
+    if frac_p1 == 1:
+        mrt_p2 = np.nan
+        if mrt is None and mrt_p1 is not None:
+            mrt = mrt_p1
+        elif mrt is not None and mrt_p1 is None:
+            mrt_p1 = mrt
+        elif mrt is None and mrt_p1 is None:
+            raise ValueError('one of mrt or mrt_p1 must be passed')
+        else:
+            assert mrt == mrt_p1, 'if frac_p1 == 1 then mrt must equal mrt_p1'
     else:
-        mrt_test = (mrt_p1 * frac_p1) + (mrt_p2 * (1 - frac_p1))
-        assert np.isclose(mrt, mrt_test), 'both mrt and mrt_p2 are passed and they are not consistent with each other'
+        assert mrt_p1 is not None
+        if mrt is None and mrt_p2 is None:
+            raise ValueError('one of mrt or mrt_p2 must be passed')
+        elif mrt is not None and mrt_p2 is None:
+            mrt_p2 = (mrt - (mrt_p1 * frac_p1)) / (1 - frac_p1)
+        elif mrt is None and mrt_p2 is not None:
+            mrt = (mrt_p1 * frac_p1) + (mrt_p2 * (1 - frac_p1))
+        else:
+            mrt_test = (mrt_p1 * frac_p1) + (mrt_p2 * (1 - frac_p1))
+            assert np.isclose(mrt, mrt_test), 'both mrt and mrt_p2 are passed and they are not consistent with each other'
 
     assert isinstance(precision, int), 'precision must be an integer'
     assert pd.api.types.is_number(mrt_p1), 'mrt_p1 must be a number'
