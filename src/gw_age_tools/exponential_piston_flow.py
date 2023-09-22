@@ -102,6 +102,8 @@ def check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2):
     assert pd.api.types.is_number(f_p2), 'f_p2 must be a number, set a dummy value if using only one piston'
     assert pd.api.types.is_number(mrt) or mrt is None, 'mrt must be a number'
     assert pd.api.types.is_number(mrt_p2) or mrt_p2 is None, 'mrt_p2 must be a number'
+    if any([mrtv < 0 for mrtv in [mrt_p1, mrt_p2, mrt]]):
+        raise ValueError(f'all mean residence times must be positive. Got:{mrt=}, {mrt_p1=}, {mrt_p2=}')
     return mrt, mrt_p2
 
 
