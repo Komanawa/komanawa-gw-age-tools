@@ -64,7 +64,7 @@ def test_get_source_initial_conc_bepm(plot=False):
     write_test_data = False
     if write_test_data:
         test_data_path.unlink(missing_ok=True)
-    source_conc.to_hdf(test_data_path, 'source_conc')
+        source_conc.to_hdf(test_data_path, 'source_conc')
     true_source_conc = pd.read_hdf(test_data_path, 'source_conc')
     assert isinstance(true_source_conc, pd.Series)
     pd.testing.assert_series_equal(source_conc, true_source_conc, check_names=False)
