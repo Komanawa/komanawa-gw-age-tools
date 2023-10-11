@@ -206,7 +206,129 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
     return source_conc_past
 
 
+def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_data, source_start_conc,
+                               mrt, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2, precision=2,
+                               inflect_start_x=None, inflect_start_y=None):  # todo check, make test, document
+    """
+    Estimate the source concentration based on a prescribed number of inflection points in the source data
+    These inflection points must be constrained by the inflect_xlim and inflect_ylim
+    :param n_inflections: int number of inflection points to use
+    :param inflect_xlim: list of tuples (or similar) of the x limits of the inflection points
+                            (e.g. [(start_date1, 10), (start_date2, 20)..])
+    :param inflect_ylim: list of tuples (or similar) of the y limits. The y limits are in units of concentration
+                         (ts.values)
+    :param ts_data: pd.Series, time series data of the source concentration must have a datetime index
+    :param source_start_conc: concentration of the source at the start of the time series (e.g. the natural
+                                concentration)
+    :param mrt: mean residence time of the source (yrs)
+    :param mrt_p1: mean residence time of the first piston (yrs)
+    :param mrt_p2: mean residence time of the second piston (yrs)
+    :param frac_p1: fraction of the source that is in the first piston
+    :param f_p1: fraction of exponential flow the first piston
+    :param f_p2: fraction of exponential flow the second piston (use a dummy value if frac_p1 = 1)
+    :param precision: precision of the age distribution (decimal places) default is 2, approximately monthly
+    :param inflect_start_x: start points for the inflection points (x values) if None then the start points will be
+                            set to the center of inflect_xlim
+    :param inflect_start_y: start points for the inflection points (y values) if None then the start points will be
+                            set to the center of inflect_ylim
+    :return:
+    """
+    assert isinstance(ts_data, pd.Series), 'ts_data must be a pandas Series'
+    assert pd.api.types.is_datetime64_any_dtype(ts_data.index), 'ts_data must have a datetime index'
+    assert isinstance(n_inflections, int) and n_inflections > 0, 'n_inflections must be an integer > 0'
+    assert pd.api.types.is_number(source_start_conc), 'source_start_conc must be a number'
+    assert source_start_conc >= 0, 'source_start_conc must be greater than or equal to 0'
 
-def estimate_source_conc_bepfm(ts_data, mrt_p1, mrt_p2, age_step, ages, age_fractions, prev_slope, max_conc,
-                               min_conc, ):
-    raise NotImplementedError('estimate_source_conc_bepfm is not implemented yet')  # todo
+    inflect_xlim = np.atleast_2d(inflect_xlim)
+    inflect_ylim = np.atleast_2d(inflect_ylim)
+    assert inflect_xlim.shape == inflect_ylim.shape, 'inflect_xlim and inflect_ylim must have the same shape'
+    assert inflect_xlim.shape == (n_inflections, 2), 'inflect_xlim and inflect_ylim must be shape (n_inflections, 2)'
+    assert pd.api.types.is_datetime64_any_dtype(inflect_xlim), 'inflect_xlim must be a datetime'
+    assert pd.api.types.is_numeric_dtype(inflect_ylim), 'inflect_ylim must be a number'
+    start_date = ts_data.index.min()
+
+    # convert inflect_xlim from datetime to years from start
+    inflect_xlim = np.array([
+        ((pd.Series(inflect_xlim[:, 0]) - start_date).dt.days / 365.25).values,
+        ((pd.Series(inflect_xlim[:, 1]) - start_date).dt.days / 365.25).values,
+    ]).transpose().round(precision)
+
+    if inflect_start_x is not None:
+        assert len(inflect_start_x) == n_inflections, 'inflect_start_x must be the same length as n_inflections'
+        assert pd.api.types.is_datetime64_any_dtype(inflect_start_x), 'inflect_start_x must be a datetime'
+        inflect_start_x = ((pd.Series(inflect_start_x) - start_date).dt.days / 365.25).values.round(precision)
+    else:
+        inflect_start_x = inflect_xlim.mean(axis=1).round(precision)
+
+    if inflect_start_y is not None:
+        assert len(inflect_start_y) == n_inflections, 'inflect_start_y must be the same length as n_inflections'
+        assert pd.api.types.is_numeric_dtype(inflect_start_y), 'inflect_start_y must be a number'
+        inflect_start_y = np.array(inflect_start_y)
+    else:
+        inflect_start_y = inflect_ylim.mean(axis=1)
+
+    # make age info
+    mrt, mrt_p2 = check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
+    age_step, ages, age_fractions = make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
+
+    intime = ((ts_data.index - start_date).days / 365.25).values.round(precision)
+
+    # run create source (to ensure it works)
+    use_args = np.concatenate((inflect_start_x[:, np.newaxis], inflect_start_y[:, np.newaxis]), axis=1).flatten()
+    use_lims_min = []
+    use_lims_max = []
+    for i in range(n_inflections):
+        use_lims_min.append(inflect_xlim[i, 0])
+        use_lims_min.append(inflect_ylim[i, 0])
+        use_lims_max.append(inflect_xlim[i, 1])
+        use_lims_max.append(inflect_ylim[i, 1])
+    use_lims = [use_lims_min, use_lims_max]
+    assert np.atleast_2d(use_lims).shape == (2, n_inflections * 2), 'use_lims must be shape (2, n_inflections*2)'
+    _make_source(ages, intime, precision, source_start_conc, n_inflections, use_args)
+
+    # make function to optimise
+    def opt_func(t, *args):
+        assert len(args) == n_inflections * 2, 'args must be a list of length n_inflections * 2'
+        t = t.round(precision)
+        source = _make_source(ages, t, precision, source_start_conc, n_inflections, args)
+        out_conc = predict_future_conc_bepm(once_and_future_source_conc=source, predict_start=t.min(),
+                                            predict_stop=t.max()+age_step,
+                             mrt_p1=mrt_p1, frac_p1=frac_p1, f_p1=f_p1, f_p2=f_p2, mrt=mrt, mrt_p2=mrt_p2,
+                                            fill_value=source_start_conc,
+                             fill_threshold=0.10, precision=precision, pred_step=age_step)
+        out_conc = out_conc.loc[t]
+        assert not out_conc.isna().any()
+        return out_conc
+
+    # todo run opt_function once to ensure it works
+    opt_func(intime, *use_args)
+
+    # run optimisation
+    print('running optimisation')
+    params, pcov = curve_fit(opt_func, intime, ts_data.values,
+                             p0=use_args,
+                             bounds=use_lims)
+
+    # generate results (source, true receptor, and modelled receptor)
+    source = _make_source(ages, intime, precision, source_start_conc, n_inflections, params)
+    true_receptor = pd.Series(index=intime, data=ts_data.values)
+    modelled_receptor = opt_func(intime, *params)
+    outdata = pd.DataFrame(data={'true_receptor': true_receptor, 'modelled_receptor': modelled_receptor,
+                                 'source': source})
+    outdata.index = start_date + pd.to_timedelta(outdata.index * 365.25, unit='D')
+    return outdata
+
+
+def _make_source(ages, t, precision, source_start_conc, n_inflections, args):
+    age_step = 10 ** -precision
+    source = pd.Series(index=np.arange(-ages.max(), t.max() + age_step*2, age_step).round(precision),
+                       data=np.nan).round(precision).sort_index()
+    source[0 - ages.max()] = source_start_conc
+    assert len(args) == n_inflections * 2, 'args must be a list of length n_inflections * 2'
+    for i in range(n_inflections):
+        x0 = args[i * 2]
+        y0 = args[i * 2 + 1]
+        source[x0] = y0
+    source[source.index.max()] = y0  # set last concentration to the same as the last inflection point
+    source = source.interpolate(method='linear', limit_direction='both')
+    return source

@@ -1,0 +1,160 @@
+"""
+created matt_dumont 
+on: 12/10/23
+"""
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from gw_age_tools.source_predictions import estimate_source_conc_bepfm, _make_source, predict_future_conc_bepm, \
+    make_age_dist, check_age_inputs
+
+
+def test_from_whakauru():
+    """
+    real world test
+    test estimating source concentration from whakauru stream data in the pokaiwhenua catchment
+    :return:
+    """
+    raise NotImplementedError
+
+
+_test_start_date = pd.to_datetime('2000-01-01')
+_test_start_conc = 0.1
+_test_pred_max = 10
+_test_inflection_pointx = np.array([-15, -10, -5, 0, 5, 15])
+_test_inflection_pointy = np.array([_test_start_conc, 1, 2, 4, 5, 10])
+assert _test_inflection_pointy.shape == _test_inflection_pointx.shape
+_test_mrt = 20
+_test_f_p1 = 0.7
+_test_f_p2 = 0.7
+_test_frac_p1 = 0.5
+_test_mrt_p1 = 5
+_test_mrt_p2 = None
+_test_precision = 2
+_test_mrt, _test_mrt_p2 = check_age_inputs(_test_mrt, _test_mrt_p1, _test_mrt_p2,
+                                           _test_frac_p1, _test_precision,
+                                           _test_f_p1, _test_f_p2)
+_test_age_kwargs = dict(
+    mrt=_test_mrt,
+    mrt_p1=_test_mrt_p1,
+    mrt_p2=_test_mrt_p2,
+    frac_p1=_test_frac_p1,
+    precision=_test_precision,
+    f_p1=_test_f_p1, f_p2=_test_f_p2,
+)
+
+
+def _make_synteic_data(plot=False):
+    """
+    make syntheic data with 5 inflection points
+    :return:
+    """
+
+    age_step, ages, age_fractions = make_age_dist(**_test_age_kwargs)
+    t = np.arange(0, _test_pred_max + age_step, age_step)
+    use_args = np.concatenate((_test_inflection_pointx[:, np.newaxis],
+                               _test_inflection_pointy[:, np.newaxis]), axis=1).flatten()
+    source = _make_source(ages, t, precision=_test_precision, source_start_conc=_test_start_conc,
+                          n_inflections=6,
+                          args=use_args)
+    receptor = predict_future_conc_bepm(
+        once_and_future_source_conc=source,
+        predict_start=0, predict_stop=_test_pred_max,
+        fill_value=_test_start_conc,
+        fill_threshold=0.05, pred_step=age_step,
+        **_test_age_kwargs)
+    source.index = _test_start_date + pd.to_timedelta(source.index * 365.25, unit='d')
+    receptor.index = _test_start_date + pd.to_timedelta(receptor.index * 365.25, unit='d')
+
+    if plot:
+        fig, ax = plt.subplots(figsize=(10, 10))
+        ax.plot(source.index, source, label='source', color='orange')
+        ax.plot(receptor.index, receptor, label='receptor', color='blue')
+        ax.legend()
+        plt.show()
+        plt.close(fig)
+
+    return source, receptor
+
+
+def test_from_synthetic_data2(plot=False):
+    source, receptor = _make_synteic_data()
+
+    out = estimate_source_conc_bepfm(
+        n_inflections=3,
+        inflect_xlim=[
+            pd.to_datetime(['1990-01-01', '1995-01-01']),
+            pd.to_datetime(['1998-01-01', '2003-01-01']),
+            pd.to_datetime(['2008-01-01', '2010-01-01']),
+        ],
+        inflect_ylim=[
+            [0.05, 0.15],
+            [1, 5],
+            [5, 12]
+        ],
+        ts_data=receptor,
+
+        source_start_conc=_test_start_conc,
+        **_test_age_kwargs,
+        inflect_start_x=None, inflect_start_y=None
+    )
+
+    if plot:
+        fig, ax = plt.subplots(figsize=(10, 10))
+        ax.plot(source.index, source, label='True source', color='orange')
+        use_receptor = out['true_receptor']
+        pred_receptor = out['modelled_receptor']
+        pred_source = out['source']
+        ax.plot(use_receptor.index, use_receptor, label='True receptor', color='blue')
+        ax.plot(pred_receptor.index, pred_receptor, label='Predicted receptor', color='red', alpha=0.5)
+        ax.plot(pred_source.index, pred_source, label='Predicted source', color='k', alpha=0.5, ls='--')
+
+        ax.legend()
+        plt.show()
+        plt.close(fig)
+def test_from_synthetic_data2_unbound(plot=False):
+    source, receptor = _make_synteic_data()
+
+    out = estimate_source_conc_bepfm(
+        n_inflections=3,
+        inflect_xlim=[
+            pd.to_datetime(['1990-01-01', '1995-01-01']),
+            pd.to_datetime(['1998-01-01', '2003-01-01']),
+            pd.to_datetime(['2008-01-01', '2010-01-01']),
+        ],
+        inflect_ylim=[
+            [0.05, 0.15],
+            [1, 12],
+            [1, 12]
+        ],
+        ts_data=receptor,
+
+        source_start_conc=_test_start_conc,
+        **_test_age_kwargs,
+        inflect_start_x=None, inflect_start_y=None
+    )
+
+    if plot:
+        fig, ax = plt.subplots(figsize=(10, 10))
+        ax.plot(source.index, source, label='True source', color='orange')
+        use_receptor = out['true_receptor']
+        pred_receptor = out['modelled_receptor']
+        pred_source = out['source']
+        ax.plot(use_receptor.index, use_receptor, label='True receptor', color='blue')
+        ax.plot(pred_receptor.index, pred_receptor, label='Predicted receptor', color='red', alpha=0.5)
+        ax.plot(pred_source.index, pred_source, label='Predicted source', color='k', alpha=0.5, ls='--')
+
+        ax.legend()
+        plt.show()
+        plt.close(fig)
+
+
+def test_from_synthetic_data5():
+    raise NotImplementedError  # todo check this with 5 inflection points, start here
+
+
+# todo make these into proper tests...
+if __name__ == '__main__':
+    #_make_synteic_data(True)
+    test_from_synthetic_data2_unbound(True)
+    test_from_synthetic_data2(True)
