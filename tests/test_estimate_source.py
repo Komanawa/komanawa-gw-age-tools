@@ -65,108 +65,31 @@ def test_from_whakauru(plot=False):
         assert not pred_source.isna().any()
         fig, ax = plt.subplots(figsize=(10, 10))
         ax.scatter(conc_data.index, conc_data, label='True receptor', color='blue')
-        ax.plot(rolling_conc.index, rolling_conc, label='True receptor (rolling, 12)', color='blue', alpha=0.5,)
-        ax.plot(pred_receptor.index, pred_receptor, label='Predicted receptor', color='red', alpha=0.5,)
-        ax.plot(pred_source.index, pred_source, label='Predicted source', color='k', alpha=0.5,)
+        ax.plot(rolling_conc.index, rolling_conc, label='True receptor (rolling, 12)', color='blue', alpha=0.5, )
+        ax.plot(pred_receptor.index, pred_receptor, label='Predicted receptor', color='red', alpha=0.5, )
+        ax.plot(pred_source.index, pred_source, label='Predicted source', color='k', alpha=0.5, )
         for i in range(len(inflect_xlim)):
             # ys
             ax.plot([inflect_xlim[i][0], inflect_xlim[i][0]], [inflect_ylim[i][0], inflect_ylim[i][1]], color='k',
-                     ls=':', alpha=0.5)
+                    ls=':', alpha=0.5)
             ax.plot([inflect_xlim[i][1], inflect_xlim[i][1]], [inflect_ylim[i][0], inflect_ylim[i][1]], color='k',
-                 ls=':', alpha=0.5)
+                    ls=':', alpha=0.5)
             # xs
             ax.plot([inflect_xlim[i][0], inflect_xlim[i][1]], [inflect_ylim[i][0], inflect_ylim[i][0]], color='k',
-                   ls=':', alpha=0.5)
+                    ls=':', alpha=0.5)
             ax.plot([inflect_xlim[i][0], inflect_xlim[i][1]], [inflect_ylim[i][1], inflect_ylim[i][1]], color='k',
                     ls=':', alpha=0.5)
 
         ax.set_ylim(0, np.array(inflect_ylim).max() * 1.1)
-        ax.set_xlim(conc_data.index.min()-pd.Timedelta(days=365*2), conc_data.index.max())
+        ax.set_xlim(conc_data.index.min() - pd.Timedelta(days=365 * 2), conc_data.index.max())
 
         ax.legend()
         plt.show()
         plt.close(fig)
 
-    raise NotImplementedError  # todo I got a nice result. it's a bit of a faff is there a better statistical technique
-def test_from_whakauru_unbounded(plot=False):
-    """
-    real world test
-    test estimating source concentration from whakauru stream data in the pokaiwhenua catchment
-    :return:
-    """
-    data_path = Path(__file__).parent.joinpath('test_data', 'Whakauru_conc.hdf')
-    age = pd.read_hdf(data_path, 'age')
-    conc_data = pd.read_hdf(data_path, 'data').set_index('datetime')
-    conc_data = conc_data['conc'].sort_index()
-    rolling_conc = conc_data.rolling(20, center=True).mean()
-
-    start_conc = 0.1
-    adder = -6
-    inflect_xlim = [
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-        pd.to_datetime([f'{2000}-01-01', f'{2022}-01-01']),
-    ]
-    inflect_ylim = [
-        [0.09, 0.11],
-        [0.1, 1],
-        [0.1, 1],
-        [0.1, 5],
-        [0.1, 5],
-        [0.1, 5],
-    ]
-    age_kwargs = dict(
-        mrt=12,
-        mrt_p1=12,
-        mrt_p2=None,
-        frac_p1=1,
-        precision=2,
-        f_p1=0.7, f_p2=0.7,
-    )
-
-    pred_source, true_receptor, modelled_receptor = estimate_source_conc_bepfm(
-        n_inflections=len(inflect_xlim),
-        inflect_xlim=inflect_xlim,
-        inflect_ylim=inflect_ylim,
-        ts_data=conc_data,
-        source_start_conc=start_conc,
-        **age_kwargs,
-        inflect_start_x=None, inflect_start_y=None
-    )
-
-    if plot:
-        pred_receptor = modelled_receptor
-        assert not pred_receptor.isna().any()
-        assert not pred_source.isna().any()
-        fig, ax = plt.subplots(figsize=(10, 10))
-        ax.scatter(conc_data.index, conc_data, label='True receptor', color='blue')
-        ax.plot(rolling_conc.index, rolling_conc, label='True receptor (rolling, 12)', color='blue', alpha=0.5,)
-        ax.plot(pred_receptor.index, pred_receptor, label='Predicted receptor', color='red', alpha=0.5,)
-        ax.plot(pred_source.index, pred_source, label='Predicted source', color='k', alpha=0.5,)
-        for i in range(len(inflect_xlim)):
-            # ys
-            ax.plot([inflect_xlim[i][0], inflect_xlim[i][0]], [inflect_ylim[i][0], inflect_ylim[i][1]], color='k',
-                     ls=':', alpha=0.5)
-            ax.plot([inflect_xlim[i][1], inflect_xlim[i][1]], [inflect_ylim[i][0], inflect_ylim[i][1]], color='k',
-                 ls=':', alpha=0.5)
-            # xs
-            ax.plot([inflect_xlim[i][0], inflect_xlim[i][1]], [inflect_ylim[i][0], inflect_ylim[i][0]], color='k',
-                   ls=':', alpha=0.5)
-            ax.plot([inflect_xlim[i][0], inflect_xlim[i][1]], [inflect_ylim[i][1], inflect_ylim[i][1]], color='k',
-                    ls=':', alpha=0.5)
-
-        ax.set_ylim(0, np.array(inflect_ylim).max() * 1.1)
-        ax.set_xlim(conc_data.index.min()-pd.Timedelta(days=365*2), conc_data.index.max())
-
-        ax.legend()
-        plt.show()
-        plt.close(fig)
-
-    raise NotImplementedError # todo does this work?
-
+    raise NotImplementedError
+    # todo I got a nice result. it's a bit of a faff is there a better statistical technique
+    #  unbounded doesn't work well... kinda need a non-linear solver to get the right answer... pest??? ugg
 
 _test_start_date = pd.to_datetime('2000-01-01')
 _test_start_conc = 0.1
