@@ -292,7 +292,7 @@ def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_dat
         t = t.round(precision)
         source = _make_source(ages, t, precision, source_start_conc, n_inflections, args)
         out_conc = predict_future_conc_bepm(once_and_future_source_conc=source, predict_start=t.min(),
-                                            predict_stop=t.max()+age_step,
+                                            predict_stop=(t.max()+age_step).round(precision),
                              mrt_p1=mrt_p1, frac_p1=frac_p1, f_p1=f_p1, f_p2=f_p2, mrt=mrt, mrt_p2=mrt_p2,
                                             fill_value=source_start_conc,
                              fill_threshold=0.10, precision=precision, pred_step=age_step)
@@ -300,8 +300,10 @@ def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_dat
         assert not out_conc.isna().any()
         return out_conc
 
-    # todo run opt_function once to ensure it works
-    opt_func(intime, *use_args)
+    # run opt_function once to ensure it works
+    assert not np.isnan(intime).any()
+    temp = opt_func(intime, *use_args)
+    assert not temp.isna().any()
 
     # run optimisation
     print('running optimisation')
@@ -313,10 +315,12 @@ def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_dat
     source = _make_source(ages, intime, precision, source_start_conc, n_inflections, params)
     true_receptor = pd.Series(index=intime, data=ts_data.values)
     modelled_receptor = opt_func(intime, *params)
-    outdata = pd.DataFrame(data={'true_receptor': true_receptor, 'modelled_receptor': modelled_receptor,
-                                 'source': source})
-    outdata.index = start_date + pd.to_timedelta(outdata.index * 365.25, unit='D')
-    return outdata
+
+    source.index = start_date + pd.to_timedelta(source.index * 365.25, unit='D')
+    true_receptor.index = start_date + pd.to_timedelta(true_receptor.index * 365.25, unit='D')
+    modelled_receptor.index = start_date + pd.to_timedelta(modelled_receptor.index * 365.25, unit='D')
+
+    return source, true_receptor, modelled_receptor
 
 
 def _make_source(ages, t, precision, source_start_conc, n_inflections, args):
