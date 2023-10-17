@@ -206,6 +206,24 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
     return source_conc_past
 
 
+def lightweight_predict_future(source, out_years, ages, age_fractions, precision):
+    """
+    a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source
+    concentration and does not check the parmeters... use at your own warning
+    :param source:
+    :param out_years:
+    :param ages:
+    :param age_fractions:
+    :param precision:
+    :return:
+    """
+    out_conc = np.full_like(out_years, np.nan)
+    for i, t in enumerate(out_years):
+        out_conc[i] = (source.loc[(t - ages).round(precision)] * age_fractions).sum()
+    receptor_conc = pd.Series(index=out_years, data=out_conc)
+    return receptor_conc
+
+
 def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_data, source_start_conc,
                                mrt, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2, precision=2,
                                inflect_start_x=None, inflect_start_y=None):  # todo check, make test, document
@@ -292,10 +310,11 @@ def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_dat
         t = t.round(precision)
         source = _make_source(ages, t, precision, source_start_conc, n_inflections, args)
         out_conc = predict_future_conc_bepm(once_and_future_source_conc=source, predict_start=t.min(),
-                                            predict_stop=(t.max()+age_step).round(precision),
-                             mrt_p1=mrt_p1, frac_p1=frac_p1, f_p1=f_p1, f_p2=f_p2, mrt=mrt, mrt_p2=mrt_p2,
+                                            predict_stop=(t.max() + age_step).round(precision),
+                                            mrt_p1=mrt_p1, frac_p1=frac_p1, f_p1=f_p1, f_p2=f_p2, mrt=mrt,
+                                            mrt_p2=mrt_p2,
                                             fill_value=source_start_conc,
-                             fill_threshold=0.10, precision=precision, pred_step=age_step)
+                                            fill_threshold=0.10, precision=precision, pred_step=age_step)
         out_conc = out_conc.loc[t]
         assert not out_conc.isna().any()
         return out_conc
@@ -325,7 +344,7 @@ def estimate_source_conc_bepfm(n_inflections, inflect_xlim, inflect_ylim, ts_dat
 
 def _make_source(ages, t, precision, source_start_conc, n_inflections, args):
     age_step = 10 ** -precision
-    source = pd.Series(index=np.arange(-ages.max(), t.max() + age_step*2, age_step).round(precision),
+    source = pd.Series(index=np.arange(-ages.max(), t.max() + age_step * 2, age_step).round(precision),
                        data=np.nan).round(precision).sort_index()
     source[0 - ages.max()] = source_start_conc
     assert len(args) == n_inflections * 2, 'args must be a list of length n_inflections * 2'
