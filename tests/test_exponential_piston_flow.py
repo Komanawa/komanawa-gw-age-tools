@@ -188,7 +188,7 @@ def test_predict_future_conc_bepm(plot=False):
 
 
 if __name__ == '__main__':
-    plot_tests = True
+    plot_tests = False
     test_predict_future_conc_bepm(plot_tests)
     test_get_source_initial_conc_bepm(plot_tests)
     test_predict_source_future_past_conc_bepm(plot_tests)
