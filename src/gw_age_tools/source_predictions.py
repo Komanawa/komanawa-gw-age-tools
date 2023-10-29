@@ -161,7 +161,7 @@ def predict_future_conc_bepm(once_and_future_source_conc: pd.Series, predict_sta
 
 
 def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2, prev_slope, max_conc,
-                                   min_conc, start_age=np.nan, precision=2):
+                                   min_conc, start_age=np.nan, precision=2, p0=None):
     """
     Estimate the historical source concentration based on the receptor initial concentration the previous slope and the
     BEPEM model parameters
@@ -179,8 +179,12 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
     :param start_age: set a start age for the source concentration (yrs) default is np.nan which will use the
                         maximum of the mrt_p1 and mrt_p2
     :param precision: precision of the age distribution (decimal places) default is 2, approximately monthly
+    :param p0: initial guess for the optimisation (slope, intercept) default is None which will use the previous slope
+                and the initial concentration
     :return: source_conc_past a pandas series of the source concentration indexed by age in years
     """
+    if p0 is None:
+        p0 = [prev_slope, init_conc]
     mrt, mrt_p2 = check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
     age_step, ages, age_fractions = make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
     t = np.arange(-5, 1, 1).astype(float)
@@ -197,7 +201,7 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
             out_conc[i] = (total_source_conc.loc[(t - ages).round(precision)] * age_fractions).sum()
         return out_conc
 
-    (s_slope, s_init), pcov = curve_fit(opt_func, t, ydata, p0=[prev_slope, init_conc],
+    (s_slope, s_init), pcov = curve_fit(opt_func, t, ydata, p0=p0,
                                         bounds=([0, 0], [np.inf, max_conc]))
     ages = np.arange(0., np.nanmax([mrt_p1, mrt_p2, np.abs(start_age)]) * 5 * 2 + age_step, age_step).round(
         precision)
