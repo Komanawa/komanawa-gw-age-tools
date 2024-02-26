@@ -7,10 +7,6 @@ a small repo to hold groundwater age tools developed by Komanawa Solutions Ltd.
    :maxdepth: 2
    :hidden:
 
-.. contents:: Page Headings
-    :depth: 3
-
-
 Dependencies
 ==================
 
