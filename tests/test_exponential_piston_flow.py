@@ -4,7 +4,7 @@ on: 17/07/23
 """
 import numpy as np
 import pandas as pd
-from gw_age_tools import binary_exp_piston_flow, binary_exp_piston_flow_cdf, predict_historical_source_conc, \
+from komanawa.gw_age_tools import binary_exp_piston_flow, binary_exp_piston_flow_cdf, predict_historical_source_conc, \
     predict_source_future_past_conc_bepm, predict_future_conc_bepm
 from pathlib import Path
 

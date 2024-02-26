@@ -3,7 +3,7 @@ created matt_dumont
 on: 14/08/23
 """
 
-from gw_detect_power.exponential_piston_flow import *
+from komanawa.gw_age_tools.source_predictions import *
 from pathlib import Path
 
 

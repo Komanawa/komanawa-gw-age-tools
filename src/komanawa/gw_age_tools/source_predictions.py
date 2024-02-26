@@ -6,7 +6,7 @@ import warnings
 import numpy as np
 import pandas as pd
 from scipy.optimize import curve_fit
-from gw_age_tools.exponential_piston_flow import make_age_dist, check_age_inputs
+from komanawa.gw_age_tools.exponential_piston_flow import make_age_dist, check_age_inputs
 
 
 def predict_source_future_past_conc_bepm(initial_conc, mrt, mrt_p1, frac_p1, f_p1, f_p2,

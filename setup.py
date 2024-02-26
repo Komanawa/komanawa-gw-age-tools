@@ -8,8 +8,8 @@ from setuptools import setup, find_packages
 BUILD_ID = os.environ.get("BUILD_BUILDID", "0")
 
 setup(
-    name="gw_age_tools",
-    version="v1.0.0",
+    name="gw-age-tools",
+    version="v2.0.0",
     # Author details
     author="Matt Dumont",
     author_email="hansonmcoombs@gmail.com",
