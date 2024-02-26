@@ -128,9 +128,10 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     :param precision: precision of the age distribution (decimal places)
     :param f_p1: fraction of the first piston flow component that is in the fast flow component
     :param f_p2: fraction of the second piston flow component that is in the fast flow component
-    :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the
-                    mrt_p1 and mrt_p2
-    :return: * age_step: the step size of the age distribution (yrs)
+    :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1 and mrt_p2
+    :return: a tuple
+
+             * age_step: the step size of the age distribution (yrs)
              * ages: the ages of the age distribution (yrs)
              * age_fractions: the fractions of the age distribution (decimal)
 
