@@ -7,6 +7,8 @@ a small repo to hold groundwater age tools developed by Komanawa Solutions Ltd.
    :maxdepth: 2
    :hidden:
 
+   autoapi/komanawa/gw_age_tools/index.rst
+
 Dependencies
 ==================
 
