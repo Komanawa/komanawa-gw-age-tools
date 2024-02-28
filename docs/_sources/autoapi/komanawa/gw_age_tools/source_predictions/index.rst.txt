@@ -1,0 +1,101 @@
+:py:mod:`komanawa.gw_age_tools.source_predictions`
+==================================================
+
+.. py:module:: komanawa.gw_age_tools.source_predictions
+
+.. autoapi-nested-parse::
+
+   created matt_dumont 
+   on: 22/09/23
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm
+   komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm
+   komanawa.gw_age_tools.source_predictions.predict_historical_source_conc
+   komanawa.gw_age_tools.source_predictions.lightweight_predict_future
+
+
+
+.. py:function:: predict_source_future_past_conc_bepm(initial_conc, mrt, mrt_p1, frac_p1, f_p1, f_p2, prev_slope, fut_slope, age_range, max_conc, min_conc, max_fut_conc=np.inf, min_fut_conc=0, precision=2)
+
+   predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope
+
+   :param initial_conc: initial concentration (at time = 0 yrs)
+   :param mrt: mean residence time of the source (yrs)
+   :param mrt_p1: mean residence time of the first piston (yrs)
+   :param frac_p1: fraction of the source that is in the first piston
+   :param f_p1: fraction of exponential flow the first piston
+   :param f_p2: fraction of exponential flow the second piston
+   :param prev_slope: slope of the previous trend (conc/yr)
+   :param fut_slope: slope of the future trend (conc/yr)
+   :param age_range: range of ages to predict the source concentration for (yrs) (start, stop) where start is negative and stop is positive years from the present time = 0 yrs is the present
+   :param max_conc: maximum concentration of the source (to limit optimisation)
+   :param min_conc: minimum concentration of the source (to limit optimisation)
+   :param max_fut_conc: maximum concentration of the source in the future (to limit the future slope creating crazy numbers)
+   :param min_fut_conc: minimum concentration of the source in the future (to limit the slope creating negative numbers)
+   :param precision: precision of the age distribution times (decimal places) default is 2, approximately monthly
+   :return: (source_conc, receptor_conc) where source_conc is a pandas series of the source concentration and receptor_conc is a pandas series of the receptor concentration both indexed by age in years relative to the initial concentration at time = 0 yrs (- for past, + for future)
+
+
+.. py:function:: predict_future_conc_bepm(once_and_future_source_conc: pandas.Series, predict_start, predict_stop, mrt_p1, frac_p1, f_p1, f_p2, mrt=None, mrt_p2=None, fill_value=1, fill_threshold=0.05, precision=2, pred_step=0.01)
+
+   predict the receptor concentration based on the source concentration time series and the  binary piston flow model parameters
+
+   :param once_and_future_source_conc: pd.Series of the source concentration index by age in decimal years the Series can have missing values and will be interpolated onto a 0.01 yr regular index therefore the once_and_future_source_conc may be passed with values only at the start, stop, and inflection points
+   :param predict_start: start of the prediction period (decimal years)
+   :param predict_stop: end of the prediction period (decimal years)
+   :param mrt_p1: mean residence time of the first piston (yrs)
+   :param frac_p1: fraction of the source that is in the first piston
+   :param f_p1: fraction of exponential flow the first piston
+   :param f_p2: fraction of exponential flow the second piston
+   :param mrt: mean residence time of the source (yrs) or None one of mrt or mrt_p2 must be passed
+   :param mrt_p2: mean residence time of the second piston (yrs) or None one of mrt or mrt_p2 must be passed
+   :param fill_value: value to prepend to the source concentration to meet the full age distribution needed (e.g. the concentration of very old water), up to the fill_threshold may be filled with the fill_value before an error is raised
+   :param fill_threshold: threshold for the source concentration to be filled with the minimum value default is 0.05 (5% of the concentration at the start time)
+   :param precision: precision of the age distribution (decimal places)
+   :param pred_step: step size for the prediction (yrs) default is 0.01 (approximately monthly), but this can result in longer run times for large prediction periods, so a larger step size can be used.  Note that pred_step must be greater or equal to the precision used
+   :return: receptor_conc a pandas series of the receptor concentration indexed by age in years
+
+
+.. py:function:: predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2, prev_slope, max_conc, min_conc, start_age=np.nan, precision=2, p0=None)
+
+   Estimate the historical source concentration based on the receptor initial concentration the previous slope and the BEPEM model parameters
+
+   :param init_conc: the receptor initial concentration
+   :param mrt: mean residence time of the source (yrs)
+   :param mrt_p1: mean residence time of the first piston (yrs)
+   :param mrt_p2: mean residence time of the second piston (yrs)
+   :param frac_p1: fraction of the source that is in the first piston
+   :param f_p1: fraction of exponential flow the first piston
+   :param f_p2: fraction of exponential flow the second piston (use a dummy value if frac_p1 = 1)
+   :param prev_slope: slope of the previous trend (conc/yr)
+   :param max_conc: maximum concentration of the source (to limit optimisation)
+   :param min_conc: minimum concentration of the source (to limit optimisation)
+   :param start_age: set a start age for the source concentration (yrs) default is np.nan which will use the maximum of the mrt_p1 and mrt_p2
+   :param precision: precision of the age distribution (decimal places) default is 2, approximately monthly
+   :param p0: initial guess for the optimisation (slope, intercept) default is None which will use the previous slope and the initial concentration
+   :return: source_conc_past a pandas series of the source concentration indexed by age in years
+
+
+.. py:function:: lightweight_predict_future(source, out_years, ages, age_fractions, precision)
+
+   a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
+
+   :param source:
+   :param out_years:
+   :param ages:
+   :param age_fractions:
+   :param precision:
+   :return:
+
+

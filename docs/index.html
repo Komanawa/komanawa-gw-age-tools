@@ -1,0 +1,643 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Komanawa Groundwater Age Tools &#8212; komanawa-gw-age-tools v2.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=aa039f9c"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="komanawa.gw_age_tools" href="autoapi/komanawa/gw_age_tools/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="_static/ksl_for_latex.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Groundwater Age Tools Overview</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="autoapi/komanawa/gw_age_tools/index.html">
+                        Code documentation
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools" title="View on GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">View on GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/company/k%C5%8Dmanawa-solutions-ltd/" title="Follow us on LinkedIn" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Follow us on LinkedIn</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.komanawa.com" title="Komanawa Solutions Ltd." class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="_static/just_symbol.png" class="icon-link-image" alt="Komanawa Solutions Ltd."/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="autoapi/komanawa/gw_age_tools/index.html">
+                        Code documentation
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools" title="View on GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">View on GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/company/k%C5%8Dmanawa-solutions-ltd/" title="Follow us on LinkedIn" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Follow us on LinkedIn</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.komanawa.com" title="Komanawa Solutions Ltd." class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="_static/just_symbol.png" class="icon-link-image" alt="Komanawa Solutions Ltd."/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="komanawa-groundwater-age-tools">
+<h1>Komanawa Groundwater Age Tools<a class="headerlink" href="#komanawa-groundwater-age-tools" title="Link to this heading">#</a></h1>
+<p>a small repo to hold groundwater age tools developed by Komanawa Solutions Ltd.</p>
+<div class="toctree-wrapper compound">
+</div>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>pandas&gt;=2.0.3</p></li>
+<li><p>numpy&gt;=1.25.2</p></li>
+<li><p>scipy&gt;=1.11.2</p></li>
+<li><p>tables&gt;=3.8.0</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>This package is currently held as a simple github repo,
+but the intention is to make it available on PyPI in the future.</p>
+<section id="install-from-pypi">
+<h3>Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Link to this heading">#</a></h3>
+<p>coming soon</p>
+</section>
+<section id="install-from-github">
+<h3>Install from Github<a class="headerlink" href="#install-from-github" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>--name<span class="w"> </span>gw_detect<span class="w">  </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">2</span>.0.3<span class="w"> </span><span class="nv">numpy</span><span class="o">=</span><span class="m">1</span>.25.2<span class="w"> </span><span class="nv">scipy</span><span class="o">=</span><span class="m">1</span>.11.2<span class="w"> </span><span class="nv">pytables</span><span class="o">=</span><span class="m">3</span>.8.0
+conda<span class="w"> </span>activate<span class="w"> </span>gw_detect
+pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<p>Detailed documentation is available in the docstrings of the functions and classes.
+The following is a brief overview of the package.</p>
+<section id="exponential-piston-flow-and-binary-piston-flow-models">
+<h3>Exponential Piston Flow and Binary Piston flow models<a class="headerlink" href="#exponential-piston-flow-and-binary-piston-flow-models" title="Link to this heading">#</a></h3>
+<p>key functions:</p>
+<ul class="simple">
+<li><p>exponential_piston_flow_cdf / binary_exp_piston_flow_cdf: calculate the cumulative distribution function for the exponential piston flow model</p></li>
+<li><p>exponential_piston_flow / binary_exp_piston_flow: calculate the probability density function for the exponential piston flow model</p></li>
+<li><p>check_age_inputs: check the inputs to the binary exponential piston flow model (convince function)</p></li>
+</ul>
+<section id="make-age-dist-function">
+<h4>make_age_dist function<a class="headerlink" href="#make-age-dist-function" title="Link to this heading">#</a></h4>
+<p>make_age_dist is a convenience function that uses the binary exponential piston flow model to calculate the age distribution and age fraction of water in a groundwater system.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mrt</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># mean residence time</span>
+<span class="n">mrt_p1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># mean residence time of the first piston</span>
+<span class="n">mrt_p2</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># will be calculated from mrt and mrt_p1</span>
+<span class="n">frac_p1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># fraction of the flow that is in the first piston</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># the precision of the age distribution (0.01 years per age step)</span>
+<span class="n">f_p1</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="c1"># fraction of the flow in the first piston which is exponential</span>
+<span class="n">f_p2</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="c1"># fraction of the flow in the second piston which is exponential</span>
+
+<span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p2</span> <span class="o">=</span> <span class="n">check_age_inputs</span><span class="p">(</span><span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p1</span><span class="p">,</span> <span class="n">mrt_p2</span><span class="p">,</span> <span class="n">frac_p1</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">f_p1</span><span class="p">,</span> <span class="n">f_p2</span><span class="p">)</span>
+<span class="n">age_step</span><span class="p">,</span> <span class="n">ages</span><span class="p">,</span> <span class="n">age_fractions</span> <span class="o">=</span> <span class="n">make_age_dist</span><span class="p">(</span><span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p1</span><span class="p">,</span> <span class="n">mrt_p2</span><span class="p">,</span> <span class="n">frac_p1</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">f_p1</span><span class="p">,</span> <span class="n">f_p2</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="c1"># ages are the age of water in years (from 0 to historical)</span>
+<span class="c1"># age_fractions are the fractions of water in each age step (from 0 to historical)</span>
+<span class="c1"># age_step is the age step in years (0.01 years in this case)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="source-and-receptor-analysis-tools">
+<h3>Source and Receptor analysis tools<a class="headerlink" href="#source-and-receptor-analysis-tools" title="Link to this heading">#</a></h3>
+<section id="predict-source-future-past-conc-bepm">
+<h4>predict_source_future_past_conc_bepm<a class="headerlink" href="#predict-source-future-past-conc-bepm" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mrt</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">mrt_p1</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">frac_p1</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">f_p1</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">f_p2</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">initial_conc</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prev_slope</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">max_conc</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">min_conc</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">age_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">fut_slope</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
+<span class="n">total_source_conc</span><span class="p">,</span> <span class="n">receptor_conc</span> <span class="o">=</span> <span class="n">predict_source_future_past_conc_bepm</span><span class="p">(</span><span class="n">initial_conc</span><span class="p">,</span> <span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p1</span><span class="p">,</span> <span class="n">frac_p1</span><span class="p">,</span> <span class="n">f_p1</span><span class="p">,</span>
+                                                                        <span class="n">f_p2</span><span class="p">,</span>
+                                                                        <span class="n">prev_slope</span><span class="p">,</span> <span class="n">fut_slope</span><span class="p">,</span> <span class="n">age_range</span><span class="p">,</span>
+                                                                        <span class="n">max_conc</span><span class="p">,</span> <span class="n">min_conc</span><span class="p">,</span> <span class="n">max_fut_conc</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                                                                        <span class="n">min_fut_conc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">total_source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">total_source_conc</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;source_conc&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">receptor_conc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">receptor_conc</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;receptor_conc&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;initial time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time (years)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;predict_source_future_past_conc_bepm&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">age_range</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/predict_source_future_past_conc_bepm.png"><img alt="_images/predict_source_future_past_conc_bepm.png" src="_images/predict_source_future_past_conc_bepm.png" style="height: 500px;" /></a>
+</figure>
+</section>
+<section id="predict-future-conc-bepm">
+<h4>predict_future_conc_bepm<a class="headerlink" href="#predict-future-conc-bepm" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">35</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+                        <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">])</span>
+<span class="n">mrt</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">mrt_p1</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">frac_p1</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">f_p1</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">f_p2</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">predict_future_conc_bepm</span><span class="p">(</span><span class="n">once_and_future_source_conc</span><span class="o">=</span><span class="n">input_series</span><span class="p">,</span>
+                                <span class="n">predict_start</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                                <span class="n">predict_stop</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                                <span class="n">mrt_p1</span><span class="o">=</span><span class="n">mrt_p1</span><span class="p">,</span> <span class="n">frac_p1</span><span class="o">=</span><span class="n">frac_p1</span><span class="p">,</span> <span class="n">f_p1</span><span class="o">=</span><span class="n">f_p1</span><span class="p">,</span> <span class="n">f_p2</span><span class="o">=</span><span class="n">f_p2</span><span class="p">,</span> <span class="n">mrt</span><span class="o">=</span><span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">fill_threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                                <span class="n">pred_step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">input_series</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">input_series</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Source Concentration (input)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Receptor Concentration&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time (years)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;predict_future_conc_bepm&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/predict_future_conc_bepm.png"><img alt="_images/predict_future_conc_bepm.png" src="_images/predict_future_conc_bepm.png" style="height: 500px;" /></a>
+</figure>
+</section>
+<section id="predict-historical-source-conc">
+<h4>predict_historical_source_conc<a class="headerlink" href="#predict-historical-source-conc" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mrt</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">mrt_p1</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">frac_p1</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">f_p1</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">f_p2</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">init_conc</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prev_slope</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">max_conc</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">min_conc</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">mrt_p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">mrt</span> <span class="o">-</span> <span class="p">(</span><span class="n">mrt_p1</span> <span class="o">*</span> <span class="n">frac_p1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">frac_p1</span><span class="p">)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">source_conc</span> <span class="o">=</span> <span class="n">predict_historical_source_conc</span><span class="p">(</span><span class="n">init_conc</span><span class="o">=</span><span class="n">init_conc</span><span class="p">,</span>
+                                             <span class="n">mrt</span><span class="o">=</span><span class="n">mrt</span><span class="p">,</span> <span class="n">mrt_p1</span><span class="o">=</span><span class="n">mrt_p1</span><span class="p">,</span> <span class="n">mrt_p2</span><span class="o">=</span><span class="n">mrt_p2</span><span class="p">,</span>
+                                             <span class="n">frac_p1</span><span class="o">=</span><span class="n">frac_p1</span><span class="p">,</span> <span class="n">f_p1</span><span class="o">=</span><span class="n">f_p1</span><span class="p">,</span>
+                                             <span class="n">f_p2</span><span class="o">=</span><span class="n">f_p2</span><span class="p">,</span> <span class="n">prev_slope</span><span class="o">=</span><span class="n">prev_slope</span><span class="p">,</span> <span class="n">max_conc</span><span class="o">=</span><span class="n">max_conc</span><span class="p">,</span>
+                                             <span class="n">min_conc</span><span class="o">=</span><span class="n">min_conc</span><span class="p">,</span> <span class="n">start_age</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">temp</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">init_conc</span> <span class="o">+</span> <span class="p">(</span><span class="n">prev_slope</span> <span class="o">*</span> <span class="n">source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">[:])</span>
+<span class="n">temp</span><span class="p">[</span><span class="n">temp</span><span class="o">&lt;</span><span class="n">min_conc</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">temp</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;receptor concentration (input)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">source_conc</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;source concentration (predicted)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;initial time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time (years)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;concentration&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;predict_historical_source_conc&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/predict_historical_source_conc.png"><img alt="_images/predict_historical_source_conc.png" src="_images/predict_historical_source_conc.png" style="height: 500px;" /></a>
+</figure>
+</section>
+</section>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="autoapi/komanawa/gw_age_tools/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">komanawa.gw_age_tools</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-from-pypi">Install from PyPI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-from-github">Install from Github</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-piston-flow-and-binary-piston-flow-models">Exponential Piston Flow and Binary Piston flow models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#make-age-dist-function">make_age_dist function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-and-receptor-analysis-tools">Source and Receptor analysis tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-source-future-past-conc-bepm">predict_source_future_past_conc_bepm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-future-conc-bepm">predict_future_conc_bepm</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-historical-source-conc">predict_historical_source_conc</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Matt Dumont.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
