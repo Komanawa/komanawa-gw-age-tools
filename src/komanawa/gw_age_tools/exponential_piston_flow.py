@@ -9,6 +9,7 @@ import pandas as pd
 def exponential_piston_flow(t, tm, f):
     """
     produce an exponential piston flow model pdf
+
     :param t: time steps to calculate pdf for (yrs)
     :param tm: mean residence time (yrs)
     :param f: fraction of the total source that is in the fast flow component
@@ -24,6 +25,7 @@ def exponential_piston_flow(t, tm, f):
 def binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
     """
     produce a binary exponential piston flow model pdf
+
     :param t: time steps to calculate pdf for (yrs)
     :param mrt_p1: mean residence time of the first piston flow component (yrs)
     :param mrt_p2: mean residence time of the second piston flow component (yrs)
@@ -41,6 +43,7 @@ def binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
 def exponential_piston_flow_cdf(t, tm, f):
     """
     produce a cdf for an exponential piston flow model
+
     :param t: time steps to calculate cdf for (yrs)
     :param tm: mean residence time (yrs)
     :param f: fraction of the total source that is in the fast flow component
@@ -58,6 +61,7 @@ def exponential_piston_flow_cdf(t, tm, f):
 def binary_exp_piston_flow_cdf(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
     """
     produce a cdf for a binary exponential piston flow model
+
     :param t: time steps to calculate cdf for (yrs)
     :param mrt_p1: mean residence time of the first piston flow model (yrs)
     :param mrt_p2: mean residence time of the second piston flow model (yrs)
@@ -75,6 +79,7 @@ def binary_exp_piston_flow_cdf(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
 def check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2):
     """
     convenience function to check BEPM age inputs
+
     :param mrt: mean residence time of the source (yrs) either mrt or mrt_p2 can be None
     :param mrt_p1: mean residence time of the first piston flow component (yrs)
     :param mrt_p2: mean residence time of the second piston flow component (yrs)
@@ -121,6 +126,7 @@ def check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2):
 def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.nan):
     """
     make an age distribution for the binary exponential piston flow model
+
     :param mrt: mean residence time of the source (yrs) either mrt or mrt_p2 can be None
     :param mrt_p1: mean residence time of the first piston flow component (yrs)
     :param mrt_p2: mean residence time of the second piston flow component (yrs)

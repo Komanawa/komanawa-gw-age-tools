@@ -14,6 +14,7 @@ def predict_source_future_past_conc_bepm(initial_conc, mrt, mrt_p1, frac_p1, f_p
                                          max_fut_conc=np.inf, min_fut_conc=0, precision=2):
     """
     predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope
+
     :param initial_conc: initial concentration (at time = 0 yrs)
     :param mrt: mean residence time of the source (yrs)
     :param mrt_p1: mean residence time of the first piston (yrs)
@@ -68,6 +69,7 @@ def predict_future_conc_bepm(once_and_future_source_conc: pd.Series, predict_sta
                              fill_threshold=0.05, precision=2, pred_step=0.01):
     """
     predict the receptor concentration based on the source concentration time series and the  binary piston flow model parameters
+
     :param once_and_future_source_conc: pd.Series of the source concentration index by age in decimal years the Series can have missing values and will be interpolated onto a 0.01 yr regular index therefore the once_and_future_source_conc may be passed with values only at the start, stop, and inflection points
     :param predict_start: start of the prediction period (decimal years)
     :param predict_stop: end of the prediction period (decimal years)
@@ -194,6 +196,7 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
 def lightweight_predict_future(source, out_years, ages, age_fractions, precision):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
+
     :param source:
     :param out_years:
     :param ages:
