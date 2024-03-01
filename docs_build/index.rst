@@ -26,9 +26,10 @@ but the intention is to make it available on PyPI in the future.
 
 Install from PyPI
 ------------------
-.. todo
 
-coming soon
+.. code-block:: bash
+
+    pip install komanawa-gw-age-tools
 
 Install from Github
 ----------------------

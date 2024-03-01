@@ -12,7 +12,7 @@ where = ["src/"]
 "*" = ["*.txt"]
 
 [project]
-name = "gw-age-tools"
+name = "komanawa-gw-age-tools"
 version = "v2.0.0"
 authors = [
     { name = "Matt Dumont", email = "Matt@komanawa.com" },
