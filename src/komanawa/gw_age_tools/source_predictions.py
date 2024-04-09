@@ -166,6 +166,7 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
     :param p0: initial guess for the optimisation (slope, intercept) default is None which will use the previous slope and the initial concentration
     :return: source_conc_past a pandas series of the source concentration indexed by age in years
     """
+    assert prev_slope>0,'This approach only works for increasing trends'
     if p0 is None:
         p0 = [prev_slope, init_conc]
     mrt, mrt_p2 = check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
