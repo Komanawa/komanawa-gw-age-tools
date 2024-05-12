@@ -134,7 +134,7 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     :param precision: precision of the age distribution (decimal places)
     :param f_p1: fraction of the first piston flow component that is in the fast flow component
     :param f_p2: fraction of the second piston flow component that is in the fast flow component
-    :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1 and mrt_p2
+    :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1*5 and mrt_p2*5
     :return: a tuple
 
              * age_step: the step size of the age distribution (yrs)
@@ -144,7 +144,7 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     """
     check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
     age_step = round(10 ** -precision, precision)
-    ages = np.arange(0, np.nanmax([mrt_p1, mrt_p2, start]) * 5, age_step).round(precision)
+    ages = np.arange(0, np.nanmax([mrt_p1*5, mrt_p2*5, start]), age_step).round(precision)
     age_cdf = binary_exp_piston_flow_cdf(ages, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
     age_fractions = np.diff(age_cdf, prepend=0)
     return age_step, ages, age_fractions
