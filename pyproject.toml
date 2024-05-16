@@ -13,7 +13,7 @@ where = ["src/"]
 
 [project]
 name = "komanawa-gw-age-tools"
-version = "v2.0.0"
+version = "v2.0.1" # todo update to new toml system..., move to unittests
 authors = [
     { name = "Matt Dumont", email = "Matt@komanawa.com" },
 ]
