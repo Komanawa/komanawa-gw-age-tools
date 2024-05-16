@@ -35,7 +35,7 @@ classifiers = [
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "komanawa.BASE.version.__version__"}
+version = {attr = "komanawa.gw_age_tools.version.__version__"}
 
 [project.urls]
 Homepage = "https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools"
