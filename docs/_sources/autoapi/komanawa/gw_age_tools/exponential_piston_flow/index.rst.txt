@@ -19,23 +19,13 @@ Functions
 
 .. autoapisummary::
 
-   komanawa.gw_age_tools.exponential_piston_flow.exponential_piston_flow
    komanawa.gw_age_tools.exponential_piston_flow.binary_exp_piston_flow
-   komanawa.gw_age_tools.exponential_piston_flow.exponential_piston_flow_cdf
    komanawa.gw_age_tools.exponential_piston_flow.binary_exp_piston_flow_cdf
    komanawa.gw_age_tools.exponential_piston_flow.check_age_inputs
+   komanawa.gw_age_tools.exponential_piston_flow.exponential_piston_flow
+   komanawa.gw_age_tools.exponential_piston_flow.exponential_piston_flow_cdf
    komanawa.gw_age_tools.exponential_piston_flow.make_age_dist
 
-
-
-.. py:function:: exponential_piston_flow(t, tm, f)
-
-   produce an exponential piston flow model pdf
-
-   :param t: time steps to calculate pdf for (yrs)
-   :param tm: mean residence time (yrs)
-   :param f: fraction of the total source that is in the fast flow component
-   :return:
 
 
 .. py:function:: binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
@@ -49,16 +39,6 @@ Functions
    :param f_p1: fraction of the first piston flow component that is in the fast flow component
    :param f_p2: fraction of the second piston flow component that is in the fast flow component
    :return: pdf of the binary exponential piston flow model
-
-
-.. py:function:: exponential_piston_flow_cdf(t, tm, f)
-
-   produce a cdf for an exponential piston flow model
-
-   :param t: time steps to calculate cdf for (yrs)
-   :param tm: mean residence time (yrs)
-   :param f: fraction of the total source that is in the fast flow component
-   :return:
 
 
 .. py:function:: binary_exp_piston_flow_cdf(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
@@ -88,6 +68,26 @@ Functions
    :return:
 
 
+.. py:function:: exponential_piston_flow(t, tm, f)
+
+   produce an exponential piston flow model pdf
+
+   :param t: time steps to calculate pdf for (yrs)
+   :param tm: mean residence time (yrs)
+   :param f: fraction of the total source that is in the fast flow component
+   :return:
+
+
+.. py:function:: exponential_piston_flow_cdf(t, tm, f)
+
+   produce a cdf for an exponential piston flow model
+
+   :param t: time steps to calculate cdf for (yrs)
+   :param tm: mean residence time (yrs)
+   :param f: fraction of the total source that is in the fast flow component
+   :return:
+
+
 .. py:function:: make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.nan)
 
    make an age distribution for the binary exponential piston flow model
@@ -99,7 +99,7 @@ Functions
    :param precision: precision of the age distribution (decimal places)
    :param f_p1: fraction of the first piston flow component that is in the fast flow component
    :param f_p2: fraction of the second piston flow component that is in the fast flow component
-   :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1 and mrt_p2
+   :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1*5 and mrt_p2*5
    :return: a tuple
 
             * age_step: the step size of the age distribution (yrs)

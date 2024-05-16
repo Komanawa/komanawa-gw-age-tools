@@ -10,8 +10,8 @@ import sys
 
 sys.path.append('/home/matt_dumont/PycharmProjects/komanawa-gw-age-tools/src')
 from komanawa.gw_age_tools import check_age_inputs, make_age_dist
-from komanawa.gw_age_tools.lightweight import lightweight_predict_future, lightweight_v2_predict_future, \
-    lightweight_v3_predict_future, lightweight_predict_future_int, lightweight_predict_future_int_np, lightweight_v2_predict_future_np
+from komanawa.gw_age_tools.lightweight import lightweight_predict_future, _lightweight_v2_predict_future, \
+    _lightweight_v3_predict_future, _lightweight_predict_future_int, lightweight_predict_future_int_np, _lightweight_v2_predict_future_np
 
 precision = 2
 mrt, mrt_p1 = 31.5, 31.5
@@ -45,21 +45,21 @@ def lightweight_v1():
 
 
 def lightweight_v2():
-    return lightweight_v2_predict_future(source2, outages, ages, age_fractions, precision)
+    return _lightweight_v2_predict_future(source2, outages, ages, age_fractions, precision)
 
 
 def lightweight_v3():
-    return lightweight_v3_predict_future(source3, outages, ages, age_fractions, precision)
+    return _lightweight_v3_predict_future(source3, outages, ages, age_fractions, precision)
 
 
 def lightweight_v4():
-    return lightweight_predict_future_int(source4, outages4, ages4, age_fractions)
+    return _lightweight_predict_future_int(source4, outages4, ages4, age_fractions)
 
 def lightweight_v5():
     return lightweight_predict_future_int_np(source5, outages4, ages4, age_fractions, adder)
 
 def lightweight_v6():
-    return lightweight_v2_predict_future_np(source5, outages4, ages4, age_fractions, adder)
+    return _lightweight_v2_predict_future_np(source5, outages4, ages4, age_fractions, adder)
 
 
 if __name__ == '__main__':

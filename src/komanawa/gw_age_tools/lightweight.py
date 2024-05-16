@@ -24,7 +24,7 @@ def lightweight_predict_future(source, out_years, ages, age_fractions, precision
     return receptor_conc
 
 
-def lightweight_predict_future_int(source, out_years, ages, age_fractions):
+def _lightweight_predict_future_int(source, out_years, ages, age_fractions):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
@@ -44,13 +44,13 @@ def lightweight_predict_future_int(source, out_years, ages, age_fractions):
 
 def lightweight_predict_future_int_np(source, out_years, ages, age_fractions, adder):
     """
-    a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
-
-    0.05x the speed of lightweight_predict_future
+    a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning, but 0.05x the runtime of lightweight_predict_future
 
     The inputs for this are different to the other functions, STRONGLY suggest testing with lightweight_predict_future first
 
     The inputs relative to lightweight_predict_future are:
+
+    .. code-block:: python
 
         precision = 2
         age_step, ages, age_fractions = make_age_dist(....)
@@ -66,9 +66,9 @@ def lightweight_predict_future_int_np(source, out_years, ages, age_fractions, ad
         lightweight_predict_future_int_np(insource, outages4, ages4, age_fractions, adder)
 
     :param source: np.ndarray, sorted by age
-    :param out_years:
-    :param ages:
-    :param precision:
+    :param out_years: np.ndarray of years to predict (integer (np.round(deepcopy(outages) * int(10 ** precision))).astype(int))
+    :param ages: np.ndarray of ages (integer (np.round(deepcopy(ages) * int(10 ** precision))).astype(int)
+    :param adder: integer, the minimum age in the source data (source4.index.min()*-1)
     :return:
     """
     useages = ages - adder
@@ -78,7 +78,7 @@ def lightweight_predict_future_int_np(source, out_years, ages, age_fractions, ad
     return out_conc
 
 
-def lightweight_v2_predict_future_np(source, out_years, ages, age_fractions, adder):
+def _lightweight_v2_predict_future_np(source, out_years, ages, age_fractions, adder):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
@@ -104,7 +104,7 @@ def lightweight_v2_predict_future_np(source, out_years, ages, age_fractions, add
     return out_conc
 
 
-def lightweight_v2_predict_future(source, out_years, ages, age_fractions, precision):
+def _lightweight_v2_predict_future(source, out_years, ages, age_fractions, precision):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
@@ -129,7 +129,7 @@ def lightweight_v2_predict_future(source, out_years, ages, age_fractions, precis
     return receptor_conc
 
 
-def lightweight_v3_predict_future(source, out_years, ages, age_fractions, precision):
+def _lightweight_v3_predict_future(source, out_years, ages, age_fractions, precision):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 

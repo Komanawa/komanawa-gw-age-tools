@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>komanawa.gw_age_tools.source_predictions &#8212; komanawa-gw-age-tools v2.0.0 documentation</title>
+    <title>komanawa.gw_age_tools.source_predictions &#8212; komanawa-gw-age-tools v2.1.0 documentation</title>
   
   
   
@@ -29,20 +29,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=aa039f9c"></script>
-    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/documentation_options.js?v=dbd6d5c5"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'autoapi/komanawa/gw_age_tools/source_predictions/index';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="prev" title="komanawa.gw_age_tools.exponential_piston_flow" href="../exponential_piston_flow/index.html" />
+    <link rel="next" title="komanawa.gw_age_tools.version" href="../version/index.html" />
+    <link rel="prev" title="komanawa.gw_age_tools.lightweight" href="../lightweight/index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -121,7 +122,7 @@
     <script>document.write(`<img src="" class="logo__image only-dark" alt=""/>`);</script>
   
   
-    <p class="title logo__title">Groundwater Age Tools Overview</p>
+    <p class="title logo__title">Gw-Age-Tools v2.1.0 Overview</p>
   
 </a></div>
     
@@ -370,49 +371,17 @@ on: 22/09/23</p>
 <h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
 <table class="autosummary longtable table autosummary">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm" title="komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_future_conc_bepm</span></code></a>(once_and_future_source_conc, ...)</p></td>
+<td><p>predict the receptor concentration based on the source concentration time series and the  binary piston flow model parameters</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.predict_historical_source_conc" title="komanawa.gw_age_tools.source_predictions.predict_historical_source_conc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_historical_source_conc</span></code></a>(init_conc, mrt, mrt_p1, ...)</p></td>
+<td><p>Estimate the historical source concentration based on the receptor initial concentration the previous slope and the BEPEM model parameters</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm" title="komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_source_future_past_conc_bepm</span></code></a>(initial_conc, ...)</p></td>
 <td><p>predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm" title="komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_future_conc_bepm</span></code></a>(once_and_future_source_conc, ...)</p></td>
-<td><p>predict the receptor concentration based on the source concentration time series and the  binary piston flow model parameters</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.predict_historical_source_conc" title="komanawa.gw_age_tools.source_predictions.predict_historical_source_conc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_historical_source_conc</span></code></a>(init_conc, mrt, mrt_p1, ...)</p></td>
-<td><p>Estimate the historical source concentration based on the receptor initial concentration the previous slope and the BEPEM model parameters</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#komanawa.gw_age_tools.source_predictions.lightweight_predict_future" title="komanawa.gw_age_tools.source_predictions.lightweight_predict_future"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lightweight_predict_future</span></code></a>(source, out_years, ages, ...)</p></td>
-<td><p>a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning</p></td>
-</tr>
 </tbody>
 </table>
-<dl class="py function">
-<dt class="sig sig-object py" id="komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm">
-<span class="sig-name descname"><span class="pre">predict_source_future_past_conc_bepm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fut_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_fut_conc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np.inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_fut_conc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/komanawa/gw_age_tools/source_predictions.html#predict_source_future_past_conc_bepm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm" title="Link to this definition">#</a></dt>
-<dd><p>predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>initial_conc</strong> – initial concentration (at time = 0 yrs)</p></li>
-<li><p><strong>mrt</strong> – mean residence time of the source (yrs)</p></li>
-<li><p><strong>mrt_p1</strong> – mean residence time of the first piston (yrs)</p></li>
-<li><p><strong>frac_p1</strong> – fraction of the source that is in the first piston</p></li>
-<li><p><strong>f_p1</strong> – fraction of exponential flow the first piston</p></li>
-<li><p><strong>f_p2</strong> – fraction of exponential flow the second piston</p></li>
-<li><p><strong>prev_slope</strong> – slope of the previous trend (conc/yr)</p></li>
-<li><p><strong>fut_slope</strong> – slope of the future trend (conc/yr)</p></li>
-<li><p><strong>age_range</strong> – range of ages to predict the source concentration for (yrs) (start, stop) where start is negative and stop is positive years from the present time = 0 yrs is the present</p></li>
-<li><p><strong>max_conc</strong> – maximum concentration of the source (to limit optimisation)</p></li>
-<li><p><strong>min_conc</strong> – minimum concentration of the source (to limit optimisation)</p></li>
-<li><p><strong>max_fut_conc</strong> – maximum concentration of the source in the future (to limit the future slope creating crazy numbers)</p></li>
-<li><p><strong>min_fut_conc</strong> – minimum concentration of the source in the future (to limit the slope creating negative numbers)</p></li>
-<li><p><strong>precision</strong> – precision of the age distribution times (decimal places) default is 2, approximately monthly</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(source_conc, receptor_conc) where source_conc is a pandas series of the source concentration and receptor_conc is a pandas series of the receptor concentration both indexed by age in years relative to the initial concentration at time = 0 yrs (- for past, + for future)</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm">
 <span class="sig-name descname"><span class="pre">predict_future_conc_bepm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">once_and_future_source_conc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt_p2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/komanawa/gw_age_tools/source_predictions.html#predict_future_conc_bepm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm" title="Link to this definition">#</a></dt>
@@ -470,21 +439,30 @@ on: 22/09/23</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="komanawa.gw_age_tools.source_predictions.lightweight_predict_future">
-<span class="sig-name descname"><span class="pre">lightweight_predict_future</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_years</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age_fractions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/komanawa/gw_age_tools/source_predictions.html#lightweight_predict_future"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#komanawa.gw_age_tools.source_predictions.lightweight_predict_future" title="Link to this definition">#</a></dt>
-<dd><p>a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters… use at your own warning</p>
+<dt class="sig sig-object py" id="komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm">
+<span class="sig-name descname"><span class="pre">predict_source_future_past_conc_bepm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mrt_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frac_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_p2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fut_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_fut_conc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">np.inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_fut_conc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/komanawa/gw_age_tools/source_predictions.html#predict_source_future_past_conc_bepm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm" title="Link to this definition">#</a></dt>
+<dd><p>predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>source</strong> – </p></li>
-<li><p><strong>out_years</strong> – </p></li>
-<li><p><strong>ages</strong> – </p></li>
-<li><p><strong>age_fractions</strong> – </p></li>
-<li><p><strong>precision</strong> – </p></li>
+<li><p><strong>initial_conc</strong> – initial concentration (at time = 0 yrs)</p></li>
+<li><p><strong>mrt</strong> – mean residence time of the source (yrs)</p></li>
+<li><p><strong>mrt_p1</strong> – mean residence time of the first piston (yrs)</p></li>
+<li><p><strong>frac_p1</strong> – fraction of the source that is in the first piston</p></li>
+<li><p><strong>f_p1</strong> – fraction of exponential flow the first piston</p></li>
+<li><p><strong>f_p2</strong> – fraction of exponential flow the second piston</p></li>
+<li><p><strong>prev_slope</strong> – slope of the previous trend (conc/yr)</p></li>
+<li><p><strong>fut_slope</strong> – slope of the future trend (conc/yr)</p></li>
+<li><p><strong>age_range</strong> – range of ages to predict the source concentration for (yrs) (start, stop) where start is negative and stop is positive years from the present time = 0 yrs is the present</p></li>
+<li><p><strong>max_conc</strong> – maximum concentration of the source (to limit optimisation)</p></li>
+<li><p><strong>min_conc</strong> – minimum concentration of the source (to limit optimisation)</p></li>
+<li><p><strong>max_fut_conc</strong> – maximum concentration of the source in the future (to limit the future slope creating crazy numbers)</p></li>
+<li><p><strong>min_fut_conc</strong> – minimum concentration of the source in the future (to limit the slope creating negative numbers)</p></li>
+<li><p><strong>precision</strong> – precision of the age distribution times (decimal places) default is 2, approximately monthly</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>(source_conc, receptor_conc) where source_conc is a pandas series of the source concentration and receptor_conc is a pandas series of the receptor concentration both indexed by age in years relative to the initial concentration at time = 0 yrs (- for past, + for future)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -504,13 +482,22 @@ on: 22/09/23</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../exponential_piston_flow/index.html"
+       href="../lightweight/index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">komanawa.gw_age_tools.exponential_piston_flow</span></code></p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">komanawa.gw_age_tools.lightweight</span></code></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../version/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">komanawa.gw_age_tools.version</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -532,10 +519,9 @@ on: 22/09/23</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm"><code class="docutils literal notranslate"><span class="pre">predict_source_future_past_conc_bepm()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm"><code class="docutils literal notranslate"><span class="pre">predict_future_conc_bepm()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komanawa.gw_age_tools.source_predictions.predict_historical_source_conc"><code class="docutils literal notranslate"><span class="pre">predict_historical_source_conc()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komanawa.gw_age_tools.source_predictions.lightweight_predict_future"><code class="docutils literal notranslate"><span class="pre">lightweight_predict_future()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm"><code class="docutils literal notranslate"><span class="pre">predict_source_future_past_conc_bepm()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -568,7 +554,7 @@ on: 22/09/23</p>
 
   <p class="copyright">
     
-      © Copyright 2024, Matt Dumont.
+      © Copyright 2024, Komanawa Solutions Ltd..
       <br/>
     
   </p>
@@ -577,7 +563,7 @@ on: 22/09/23</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     <br/>
   </p>
 </div>
