@@ -194,19 +194,3 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
     return source_conc_past
 
 
-def lightweight_predict_future(source, out_years, ages, age_fractions, precision):
-    """
-    a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
-
-    :param source:
-    :param out_years:
-    :param ages:
-    :param age_fractions:
-    :param precision:
-    :return:
-    """
-    out_conc = np.full_like(out_years, np.nan)
-    for i, t in enumerate(out_years):
-        out_conc[i] = (source.loc[(t - ages).round(precision)] * age_fractions).sum()
-    receptor_conc = pd.Series(index=out_years, data=out_conc)
-    return receptor_conc

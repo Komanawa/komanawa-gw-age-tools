@@ -5,7 +5,9 @@ on: 17/07/23
 import numpy as np
 import pandas as pd
 from komanawa.gw_age_tools import binary_exp_piston_flow, binary_exp_piston_flow_cdf, predict_historical_source_conc, \
-    predict_source_future_past_conc_bepm, predict_future_conc_bepm
+    predict_source_future_past_conc_bepm, predict_future_conc_bepm, check_age_inputs, make_age_dist
+from komanawa.gw_age_tools.lightweight import lightweight_predict_future_int_np, lightweight_predict_future
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -74,13 +76,13 @@ def test_get_source_initial_conc_bepm(plot=False):
         fig, ax = plt.subplots()
         temp = pd.Series(index=source_conc.index)
         temp[:] = init_conc + (prev_slope * source_conc.index[:])
-        temp[temp<min_conc] = np.nan
+        temp[temp < min_conc] = np.nan
 
         ax.plot(temp.index, temp.values, label='receptor concentration (input)', color='orange')
         ax.plot(source_conc.index, source_conc.values, label='source concentration (predicted)', color='b')
         ax.axvline(0, color='k', linestyle='--', label='initial time')
         ax.set_xlabel('time (years)')
-        ax.set_xlim(-100,10)
+        ax.set_xlim(-100, 10)
         ax.set_ylabel('concentration')
         ax.set_title('predict_historical_source_conc')
         ax.legend()
@@ -187,9 +189,38 @@ def test_predict_future_conc_bepm(plot=False):
         assert 'the source concentration is missing' in str(val)
 
 
+def test_lightweight_int_np_vs_lightweight():
+    precision = 2
+    mrt, mrt_p1 = 31.5, 31.5
+    frac_p1 = 1
+    mrt_p2 = None
+    f_p1 = 0.65619
+    f_p2 = 0.65619  # dummy
+    mrt, mrt_p2 = check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
+    age_step, ages, age_fractions = make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
+    source1 = pd.Series(index=np.arange(-ages.max(), 500, 10 ** -precision).round(precision), data=np.nan, dtype=float)
+    source1.iloc[0] = 1
+    source1.iloc[-1] = 10
+    source1 = source1.interpolate(method='index')
+    source1 = source1.sort_index()
+    source4 = deepcopy(source1)
+    source4.index = (np.round(source4.index * int(10 ** precision))).astype(int)
+    ages4 = (np.round(deepcopy(ages) * int(10 ** precision))).astype(int)
+
+    outages = np.linspace(1, 400, 1000)
+    outages4 = (np.round(deepcopy(outages) * int(10 ** precision))).astype(int)
+    adder = source4.index.min() * -1
+    source5 = deepcopy(source4).values
+
+    v1 = lightweight_predict_future(source1, outages, ages, age_fractions, precision)
+    v5 = lightweight_predict_future_int_np(source5, outages4, ages4, age_fractions, adder)
+    assert np.allclose(v1.values, v5)
+
+
 if __name__ == '__main__':
     plot_tests = False
     test_predict_future_conc_bepm(plot_tests)
     test_get_source_initial_conc_bepm(plot_tests)
     test_predict_source_future_past_conc_bepm(plot_tests)
     test_binary_piston_flow()
+    test_lightweight_int_np_vs_lightweight()
