@@ -1,0 +1,12 @@
+komanawa.gw_age_tools.version
+=============================
+
+.. py:module:: komanawa.gw_age_tools.version
+
+.. autoapi-nested-parse::
+
+   created matt_dumont 
+   on: 16/05/24
+
+
+
