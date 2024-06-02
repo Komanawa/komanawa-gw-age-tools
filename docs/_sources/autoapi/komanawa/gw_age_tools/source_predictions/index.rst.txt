@@ -1,5 +1,5 @@
-:py:mod:`komanawa.gw_age_tools.source_predictions`
-==================================================
+komanawa.gw_age_tools.source_predictions
+========================================
 
 .. py:module:: komanawa.gw_age_tools.source_predictions
 
@@ -10,18 +10,52 @@
 
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
+   komanawa.gw_age_tools.source_predictions.check_age_inputs
+   komanawa.gw_age_tools.source_predictions.make_age_dist
    komanawa.gw_age_tools.source_predictions.predict_future_conc_bepm
    komanawa.gw_age_tools.source_predictions.predict_historical_source_conc
    komanawa.gw_age_tools.source_predictions.predict_source_future_past_conc_bepm
+
+
+Module Contents
+---------------
+
+.. py:function:: check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2)
+
+   convenience function to check BEPM age inputs
+
+   :param mrt: mean residence time of the source (yrs) either mrt or mrt_p2 can be None
+   :param mrt_p1: mean residence time of the first piston flow component (yrs)
+   :param mrt_p2: mean residence time of the second piston flow component (yrs)
+   :param frac_p1: fraction of the total source that is in the first piston flow component
+   :param precision: precision of the age distribution (decimal places)
+   :param f_p1: fraction of the first piston flow component that is in the fast flow component
+   :param f_p2: fraction of the second piston flow component that is in the fast flow component
+   :return:
+
+
+.. py:function:: make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.nan)
+
+   make an age distribution for the binary exponential piston flow model
+
+   :param mrt: mean residence time of the source (yrs) either mrt or mrt_p2 can be None
+   :param mrt_p1: mean residence time of the first piston flow component (yrs)
+   :param mrt_p2: mean residence time of the second piston flow component (yrs)
+   :param frac_p1: fraction of the total source that is in the first piston flow component
+   :param precision: precision of the age distribution (decimal places)
+   :param f_p1: fraction of the first piston flow component that is in the fast flow component
+   :param f_p2: fraction of the second piston flow component that is in the fast flow component
+   :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1*5 and mrt_p2*5
+   :return: a tuple
+
+            * age_step: the step size of the age distribution (yrs)
+            * ages: the ages of the age distribution (yrs)
+            * age_fractions: the fractions of the age distribution (decimal)
 
 
 

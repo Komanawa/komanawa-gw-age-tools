@@ -1,5 +1,5 @@
-:py:mod:`komanawa.gw_age_tools`
-===============================
+komanawa.gw_age_tools
+=====================
 
 .. py:module:: komanawa.gw_age_tools
 
@@ -12,22 +12,18 @@
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   exponential_piston_flow/index.rst
-   lightweight/index.rst
-   source_predictions/index.rst
-   version/index.rst
-
-
-Package Contents
-----------------
+   /autoapi/komanawa/gw_age_tools/exponential_piston_flow/index
+   /autoapi/komanawa/gw_age_tools/lightweight/index
+   /autoapi/komanawa/gw_age_tools/source_predictions/index
+   /autoapi/komanawa/gw_age_tools/version/index
 
 
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -43,6 +39,8 @@ Functions
    komanawa.gw_age_tools.predict_source_future_past_conc_bepm
 
 
+Package Contents
+----------------
 
 .. py:function:: binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
 

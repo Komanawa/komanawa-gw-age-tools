@@ -1,5 +1,5 @@
-:py:mod:`komanawa.gw_age_tools.lightweight`
-===========================================
+komanawa.gw_age_tools.lightweight
+=================================
 
 .. py:module:: komanawa.gw_age_tools.lightweight
 
@@ -10,12 +10,8 @@
 
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -23,6 +19,8 @@ Functions
    komanawa.gw_age_tools.lightweight.lightweight_predict_future_int_np
 
 
+Module Contents
+---------------
 
 .. py:function:: lightweight_predict_future(source, out_years, ages, age_fractions, precision)
 

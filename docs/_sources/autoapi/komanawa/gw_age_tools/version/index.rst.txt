@@ -1,5 +1,5 @@
-:py:mod:`komanawa.gw_age_tools.version`
-=======================================
+komanawa.gw_age_tools.version
+=============================
 
 .. py:module:: komanawa.gw_age_tools.version
 

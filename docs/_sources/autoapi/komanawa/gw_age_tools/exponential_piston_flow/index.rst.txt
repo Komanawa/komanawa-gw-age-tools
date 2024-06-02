@@ -1,5 +1,5 @@
-:py:mod:`komanawa.gw_age_tools.exponential_piston_flow`
-=======================================================
+komanawa.gw_age_tools.exponential_piston_flow
+=============================================
 
 .. py:module:: komanawa.gw_age_tools.exponential_piston_flow
 
@@ -10,12 +10,8 @@
 
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -27,6 +23,8 @@ Functions
    komanawa.gw_age_tools.exponential_piston_flow.make_age_dist
 
 
+Module Contents
+---------------
 
 .. py:function:: binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
 

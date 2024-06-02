@@ -1,7 +1,7 @@
-Komanawa Groundwater Age Tools
+Kо̄manawa Groundwater Age Tools
 #######################################
 
-a small repo to hold groundwater age tools developed by Komanawa Solutions Ltd.
+a small repo to hold groundwater age tools developed by Kо̄manawa Solutions Ltd.
 
 :Author: |author|
 :copyright: |copyright|
