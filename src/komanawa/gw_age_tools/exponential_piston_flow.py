@@ -147,4 +147,5 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     ages = np.arange(0, np.nanmax([mrt_p1*5, mrt_p2*5, start]), age_step).round(precision)
     age_cdf = binary_exp_piston_flow_cdf(ages, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2)
     age_fractions = np.diff(age_cdf, prepend=0)
+    age_fractions = age_fractions / age_fractions.sum()
     return age_step, ages, age_fractions
