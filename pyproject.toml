@@ -30,7 +30,6 @@ dependencies = [
 
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: LGPL-3.0 License",
     "Operating System :: OS Independent",
 ]
 
