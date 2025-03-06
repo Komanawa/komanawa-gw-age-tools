@@ -8,6 +8,7 @@ import pandas as pd
 from komanawa.gw_age_tools import binary_exp_piston_flow, binary_exp_piston_flow_cdf, predict_historical_source_conc, \
     predict_source_future_past_conc_bepm, predict_future_conc_bepm, check_age_inputs, make_age_dist
 from komanawa.gw_age_tools.lightweight import lightweight_predict_future_int_np, lightweight_predict_future
+from komanawa.gw_age_tools.exponential_piston_flow import exponential_piston_flow
 from copy import deepcopy
 from pathlib import Path
 

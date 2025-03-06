@@ -12,10 +12,10 @@ def exponential_piston_flow(t, tm, f):
 
     :param t: time steps to calculate pdf for (yrs)
     :param tm: mean residence time (yrs)
-    :param f: fraction of the total source that is in the fast flow component
+    :param f: fraction of the total source that is in the fast flow component  (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
     :return:
     """
-    t = np.atleast_1d(t)
+    t = np.atleast_1d(t).astype(float)
     out = np.zeros_like(t)
     idx = t >= tm * (1 - f)
     out[idx] = (f * tm) ** -1. * np.e ** (-(t[idx] / f / tm) + (1 / f) - 1)
@@ -30,8 +30,8 @@ def binary_exp_piston_flow(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
     :param mrt_p1: mean residence time of the first piston flow component (yrs)
     :param mrt_p2: mean residence time of the second piston flow component (yrs)
     :param frac_p1: fraction of the total source that is in the first piston flow component
-    :param f_p1: fraction of the first piston flow component that is in the fast flow component
-    :param f_p2: fraction of the second piston flow component that is in the fast flow component
+    :param f_p1: fraction of the first piston flow component that is in the fast flow component  (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
+    :param f_p2: fraction of the second piston flow component that is in the fast flow component  (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
     :return: pdf of the binary exponential piston flow model
     """
     frac_p2 = 1 - frac_p1
@@ -66,8 +66,8 @@ def binary_exp_piston_flow_cdf(t, mrt_p1, mrt_p2, frac_p1, f_p1, f_p2):
     :param mrt_p1: mean residence time of the first piston flow model (yrs)
     :param mrt_p2: mean residence time of the second piston flow model (yrs)
     :param frac_p1: fraction of the total source that is in the first piston flow model
-    :param f_p1: fraction of the first piston flow model that is in the fast flow component
-    :param f_p2: fraction of the second piston flow model that is in the fast flow component
+    :param f_p1: fraction of the first piston flow model that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
+    :param f_p2: fraction of the second piston flow model that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
     :return: cdf of the binary exponential piston flow model
     """
     frac_p1 = float(frac_p1)
@@ -85,8 +85,8 @@ def check_age_inputs(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2):
     :param mrt_p2: mean residence time of the second piston flow component (yrs)
     :param frac_p1: fraction of the total source that is in the first piston flow component
     :param precision: precision of the age distribution (decimal places)
-    :param f_p1: fraction of the first piston flow component that is in the fast flow component
-    :param f_p2: fraction of the second piston flow component that is in the fast flow component
+    :param f_p1: fraction of the first piston flow component that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
+    :param f_p2: fraction of the second piston flow component that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
     :return:
     """
     if frac_p1 == 1:
@@ -132,8 +132,8 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     :param mrt_p2: mean residence time of the second piston flow component (yrs)
     :param frac_p1: fraction of the total source that is in the first piston flow component
     :param precision: precision of the age distribution (decimal places)
-    :param f_p1: fraction of the first piston flow component that is in the fast flow component
-    :param f_p2: fraction of the second piston flow component that is in the fast flow component
+    :param f_p1: fraction of the first piston flow component that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
+    :param f_p2: fraction of the second piston flow component that is in the fast flow component (x * / x). f=0.5 when EPM ratio = 1:1 (The EPM ratio is the ratio of the length of area at the water table not receiving recharge (x*) to the length of area receiving recharge (x), or the ratio of the piston-flow and exponential model)
     :param start: start age for the age distribution (yrs) default is np.nan which will use the maximum of the mrt_p1*5 and mrt_p2*5
     :return: a tuple
 
@@ -149,3 +149,18 @@ def make_age_dist(mrt, mrt_p1, mrt_p2, frac_p1, precision, f_p1, f_p2, start=np.
     age_fractions = np.diff(age_cdf, prepend=0)
     age_fractions = age_fractions / age_fractions.sum()
     return age_step, ages, age_fractions
+
+
+if __name__ == '__main__':
+
+    # remake tracerLPM example
+    import matplotlib.pyplot as plt
+
+    t = np.arange(0, 100., 1)
+    tm = 25.
+    f = 0.5
+    fig, ax = plt.subplots()
+    ax.plot(t, exponential_piston_flow(t, tm, f))
+    ax2 = ax.twinx()
+    ax2.plot(t, exponential_piston_flow_cdf(t, tm, f), color='red')
+    plt.show()

@@ -10,6 +10,9 @@ def lightweight_predict_future(source, out_years, ages, age_fractions, precision
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
+
     :param source:
     :param out_years:
     :param ages:
@@ -28,7 +31,10 @@ def _lightweight_predict_future_int(source, out_years, ages, age_fractions):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
     1/4 the speed of lightweight_predict_future
+
     :param source:
     :param out_years:
     :param ages:
@@ -44,6 +50,8 @@ def _lightweight_predict_future_int(source, out_years, ages, age_fractions):
 
 def lightweight_predict_future_int_np(source, out_years, ages, age_fractions, adder):
     """
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning, but 0.05x the runtime of lightweight_predict_future
 
     The inputs for this are different to the other functions, STRONGLY suggest testing with lightweight_predict_future first
@@ -83,6 +91,9 @@ def _lightweight_v2_predict_future_np(source, out_years, ages, age_fractions, ad
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
     slower than lightweight_predict_future_int_np
+
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
     :param source:
     :param out_years:
     :param ages:
@@ -108,6 +119,8 @@ def _lightweight_v2_predict_future(source, out_years, ages, age_fractions, preci
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
 
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
     higher memory use and 2.5x slower than lightweight_predict_future
     :param source:
     :param out_years:
@@ -132,6 +145,8 @@ def _lightweight_v2_predict_future(source, out_years, ages, age_fractions, preci
 def _lightweight_v3_predict_future(source, out_years, ages, age_fractions, precision):
     """
     a lightweight version of predict_future_conc_bepm that does not check inputs and does not interpolate the source concentration and does not check the parmeters... use at your own warning
+
+    NOTE: only supports BEPM with 1 or 2 piston flows
 
     higher memory use and 2x slower than lightweight_predict_future
     :param source:

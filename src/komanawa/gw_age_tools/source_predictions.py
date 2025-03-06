@@ -15,6 +15,8 @@ def predict_source_future_past_conc_bepm(initial_conc, mrt, mrt_p1, frac_p1, f_p
     """
     predict the source and receptor concentration in the future and past based on the current concentration the historical observed slope and the future predicted/scenario slope
 
+    NOTE: only supports BEPM with 1 or 2 piston flows
+
     :param initial_conc: initial concentration (at time = 0 yrs)
     :param mrt: mean residence time of the source (yrs)
     :param mrt_p1: mean residence time of the first piston (yrs)
@@ -69,6 +71,8 @@ def predict_future_conc_bepm(once_and_future_source_conc: pd.Series, predict_sta
                              fill_threshold=0.05, precision=2, pred_step=0.01):
     """
     predict the receptor concentration based on the source concentration time series and the  binary piston flow model parameters
+
+    NOTE: only supports BEPM with 1 or 2 piston flows
 
     :param once_and_future_source_conc: pd.Series of the source concentration index by age in decimal years the Series can have missing values and will be interpolated onto a 0.01 yr regular index therefore the once_and_future_source_conc may be passed with values only at the start, stop, and inflection points
     :param predict_start: start of the prediction period (decimal years)
@@ -150,6 +154,8 @@ def predict_historical_source_conc(init_conc, mrt, mrt_p1, mrt_p2, frac_p1, f_p1
                                    min_conc, start_age=np.nan, precision=2, p0=None):
     """
     Estimate the historical source concentration based on the receptor initial concentration the previous slope and the BEPEM model parameters
+
+    NOTE: only supports BEPM with 1 or 2 piston flows
 
     :param init_conc: the receptor initial concentration
     :param mrt: mean residence time of the source (yrs)
