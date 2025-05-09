@@ -5,7 +5,7 @@ on: 3/6/25
 import numpy as np
 
 
-# todo
+# todo not sure why this doesn't match, but I think it has to do with the integration implementation... I need to better understand..
 
 def dispersion_model(t, tm, dp):
     """
@@ -39,12 +39,17 @@ if __name__ == '__main__':
     # reproduce the distribution from TraceLPM
     import matplotlib.pyplot as plt
 
-    t = np.arange(1, 201, 1)
+    t = np.arange(1, 201, 0.1).astype(float)
     tm = 25.
     dp = 0.5
-    dispersion_model(9.5, tm, dp)
+    dispersion_model(12.5, tm, dp)
+    # todo the peak I'm getting is too wide
     fig, ax = plt.subplots()
-    ax.plot(t, dispersion_model(t, tm, dp))
-    ax2 = ax.twinx()
-    ax2.plot(t, dispersion_model_cdf(t, tm, dp), color='red')
+    dm_output = dispersion_model(t, tm, dp)
+    t2= np.arange(1, 200, 1)
+    dm_output2 = dispersion_model(t2, tm, 1)
+    dm_output_cdf = dispersion_model_cdf(t, tm, dp)
+    ax.plot(t/tm, dm_output)
+    # ax2 = ax.twinx()
+    # ax2.plot(t, dispersion_model_cdf(t, tm, dp), color='red')
     plt.show()
