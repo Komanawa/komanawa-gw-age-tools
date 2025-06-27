@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>komanawa.gw_age_tools.source_predictions &#8212; komanawa-gw-age-tools v2.1.1 documentation</title>
+    <title>komanawa.gw_age_tools.source_predictions &#8212; komanawa-gw-age-tools v2.1.2 documentation</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
   <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
 
-    <script src="../../../_static/documentation_options.js?v=7fae51dc"></script>
+    <script src="../../../_static/documentation_options.js?v=4856dbb6"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/komanawa/gw_age_tools/source_predictions';</script>
@@ -120,7 +120,7 @@
     <script>document.write(`<img src="" class="logo__image only-dark" alt=""/>`);</script>
   
   
-    <p class="title logo__title">Gw-Age-Tools v2.1.1 Overview</p>
+    <p class="title logo__title">Gw-Age-Tools v2.1.2 Overview</p>
   
 </a></div>
     
@@ -486,7 +486,7 @@
 
     <span class="c1"># check the start</span>
     <span class="n">pred_ages</span> <span class="o">=</span> <span class="p">(</span><span class="n">predict_start</span> <span class="o">-</span> <span class="n">ages</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">pred_ages</span><span class="p">,</span> <span class="n">once_and_future_source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">pred_ages</span><span class="p">,</span> <span class="n">once_and_future_source_conc</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">idx</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
         <span class="n">missing_age_frac</span> <span class="o">=</span> <span class="n">age_fractions</span><span class="p">[</span><span class="o">~</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">minium_pass_age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">pred_ages</span><span class="p">)[(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">age_fractions</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">fill_threshold</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
