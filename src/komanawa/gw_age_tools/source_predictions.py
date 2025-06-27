@@ -122,7 +122,7 @@ def predict_future_conc_bepm(once_and_future_source_conc: pd.Series, predict_sta
 
     # check the start
     pred_ages = (predict_start - ages).round(precision)
-    idx = np.in1d(pred_ages, once_and_future_source_conc.index)
+    idx = np.isin(pred_ages, once_and_future_source_conc.index)
     if not idx.all():
         missing_age_frac = age_fractions[~idx].sum()
         minium_pass_age = np.flip(pred_ages)[(np.flip(age_fractions).cumsum() >= fill_threshold).argmax()]

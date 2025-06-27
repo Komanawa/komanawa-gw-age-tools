@@ -41,13 +41,13 @@ Install from Github
 
 .. code-block:: bash
 
-    pip install git+https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools
+    pip install git+https://github.com/Komanawa/komanawa-gw-age-tools
 
 .. code-block:: bash
 
     conda create -c conda-forge --name gw_detect  python=3.11 pandas=2.0.3 numpy=1.25.2 scipy=1.11.2 pytables=3.8.0
     conda activate gw_detect
-    pip install git+https://github.com/Komanawa-Solutions-Ltd/komanawa-gw-age-tools
+    pip install git+https://github.com/Komanawa/komanawa-gw-age-tools
 
 
 Usage
